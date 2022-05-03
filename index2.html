@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  	<meta charset="utf-8">
+  	<title>A-Frame GUI All Components</title>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+ 	<!--script src="https://rdub80.github.io/aframe-gui/examples/js/aframe-gui.js"></script-->
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+
+</head>
+<body>
+	<a-scene vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+		<a-camera id="maincamera" look-controls wasd-controls position="0 1.6 0"></a-camera>
+		<a-entity position="2 2 0">
+			<a-entity mixin="marker" position="0 0 0.01"></a-entity>
+			<a-entity position="0 0 0" geometry="primitive: plane; width: auto; height: auto" material="color: #333"
+					  text="color: yellow; align: left; value: [LEFT ALIGNED]; width: 2; ">
+			</a-entity>
+			<a-entity mixin="marker" position="0 0.2 0.01"></a-entity>
+			<a-entity position="0 0.2 0" geometry="primitive: plane; width: auto; height: auto" material="color: #333"
+					  text="color: red; align: right; value: [RIGHT ALIGNED]; width: 2; ">
+			</a-entity>
+			<a-entity mixin="marker" position="0 0.4 0.01"></a-entity>
+			<a-entity position="0 0.4 0" geometry="primitive: plane; width: auto; height: auto" material="color: #eee"
+					  text="color: blue; align: center; value: [CENTER ALIGNED]; width: 2; ">
+			</a-entity>
+		  </a-entity>
+
+		<a-sphere position="0 1.6 -2" radius="0.3" color="#EF2D5E"></a-sphere>
+		<!-- Mouse cursor so we can click on the scene with mouse or touch. -->
+		<a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
+		<a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
+		<a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
+
+	</a-scene>
+
+	<script type="text/javascript">
+
+		window.timedout = function () {
+			console.log("GUI timer timed out");
+		}
+
+		window.clickTitle = function (x) {
+			console.log("title clicked GUI:",x);
+		}
+
+		window.changePosition = function (x) {
+			console.log("clicked:", x.srcElement)
+			var pos = x.srcElement.object3D.position;
+			document.getElementById("hud").setAttribute('position',pos);
+		}
+
+
+	</script>
+
+</body>
+</html>
